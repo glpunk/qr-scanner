@@ -21,7 +21,7 @@
       }
     </style>
     <h1>Scan from WebCam:</h1>
-    <button onclick="scanCode()">Scan QR code</button>
+    <button id="scan-code-btn">Scan QR code</button>
     <div>
       <video id="qr-video"></video>
       <br />
@@ -108,6 +108,12 @@
         document.getElementById("stop-button").addEventListener("click", () => {
           scanner.stop();
         });
+
+        document
+          .getElementById("scan-code-btn")
+          .addEventListener("click", () => {
+            scanCode();
+          });
       }
     </script>
   </body>

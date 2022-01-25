@@ -23,11 +23,6 @@
     <h1>Scan from WebCam:</h1>
     <div>
       <video id="qr-video"></video>
-      <br />
-      <label>
-        <input id="show-scan-region" type="checkbox" />
-        Show scan region
-      </label>
     </div>
     <div>
       <select id="inversion-mode-select">
@@ -142,15 +137,6 @@
 
       // for debugging
       window.scanner = scanner;
-
-      document
-        .getElementById("show-scan-region")
-        .addEventListener("change", (e) => {
-          const input = e.target;
-          const label = input.parentNode;
-          label.parentNode.insertBefore(scanner.$canvas, label.nextSibling);
-          scanner.$canvas.style.display = input.checked ? "block" : "none";
-        });
 
       document
         .getElementById("inversion-mode-select")

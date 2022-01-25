@@ -21,6 +21,7 @@
       }
     </style>
     <h1>Scan from WebCam:</h1>
+    <button onclick="scanCode()">Scan QR code</button>
     <div>
       <video id="qr-video"></video>
       <br />
@@ -65,43 +66,49 @@
         );
       }
 
-      // ####### Web Cam Scanning #######
+      let scanner = null;
 
-      const scanner = new QrScanner(
-        video,
-        (result) => setResult(camQrResult, result),
-        (error) => {
-          camQrResult.textContent = error;
-          camQrResult.style.color = "inherit";
-        }
-      );
+      function scanCode() {
+        // ####### Web Cam Scanning #######
 
-      scanner.start().then(() => {});
+        scanner = new QrScanner(
+          video,
+          (result) => setResult(camQrResult, result),
+          (error) => {
+            camQrResult.textContent = error;
+            camQrResult.style.color = "inherit";
+          }
+        );
 
-      QrScanner.hasCamera().then(
-        (hasCamera) => (camHasCamera.textContent = hasCamera)
-      );
+        scanner.start().then(() => {});
 
-      // for debugging
-      window.scanner = scanner;
+        QrScanner.hasCamera().then(
+          (hasCamera) => (camHasCamera.textContent = hasCamera)
+        );
 
-      document
-        .getElementById("show-scan-region")
-        .addEventListener("change", (e) => {
-          const input = e.target;
-          const label = input.parentNode;
-          label.parentNode.insertBefore(scanner.$canvas, label.nextSibling);
-          scanner.$canvas.style.display = input.checked ? "block" : "none";
-          scanner.setCamera("environment");
+        // for debugging
+        window.scanner = scanner;
+
+        document
+          .getElementById("show-scan-region")
+          .addEventListener("change", (e) => {
+            const input = e.target;
+            const label = input.parentNode;
+            label.parentNode.insertBefore(scanner.$canvas, label.nextSibling);
+            scanner.$canvas.style.display = input.checked ? "block" : "none";
+            scanner.setCamera("environment");
+          });
+
+        document
+          .getElementById("start-button")
+          .addEventListener("click", () => {
+            scanner.start();
+          });
+
+        document.getElementById("stop-button").addEventListener("click", () => {
+          scanner.stop();
         });
-
-      document.getElementById("start-button").addEventListener("click", () => {
-        scanner.start();
-      });
-
-      document.getElementById("stop-button").addEventListener("click", () => {
-        scanner.stop();
-      });
+      }
     </script>
   </body>
 </html>

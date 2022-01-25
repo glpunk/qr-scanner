@@ -90,20 +90,7 @@
         }
       );
 
-      scanner.start().then(() => {
-        // List cameras after the scanner started to avoid listCamera's stream and the scanner's stream being requested
-        // at the same time which can result in listCamera's unconstrained stream also being offered to the scanner.
-        // Note that we can also start the scanner after listCameras, we just have it this way around in the demo to
-        // start the scanner earlier.
-        QrScanner.listCameras(true).then((cameras) =>
-          cameras.forEach((camera) => {
-            const option = document.createElement("option");
-            option.value = camera.id;
-            option.text = camera.label;
-            camList.add(option);
-          })
-        );
-      });
+      scanner.start().then(() => {});
 
       QrScanner.hasCamera().then(
         (hasCamera) => (camHasCamera.textContent = hasCamera)
@@ -119,11 +106,8 @@
           const label = input.parentNode;
           label.parentNode.insertBefore(scanner.$canvas, label.nextSibling);
           scanner.$canvas.style.display = input.checked ? "block" : "none";
+          scanner.setCamera("environment");
         });
-
-      camList.addEventListener("change", (event) => {
-        scanner.setCamera(event.target.value).then(updateFlashAvailability);
-      });
 
       document.getElementById("start-button").addEventListener("click", () => {
         scanner.start();

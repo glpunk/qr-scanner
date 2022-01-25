@@ -53,6 +53,7 @@
       const camQrResultTimestamp = document.getElementById(
         "cam-qr-result-timestamp"
       );
+      const scanBtn = document.getElementById("scan-code-btn");
 
       function setResult(label, result) {
         console.log("setResult", result);
@@ -70,6 +71,7 @@
 
       function scanCode() {
         // ####### Web Cam Scanning #######
+        console.log("scanCode");
 
         scanner = new QrScanner(
           video,

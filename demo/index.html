@@ -106,8 +106,6 @@
         }
       );
 
-      scanner.$canvas.style.display = "block";
-
       const updateFlashAvailability = () => {
         scanner.hasFlash().then((hasFlash) => {
           camHasFlash.textContent = hasFlash;
@@ -116,6 +114,7 @@
       };
 
       scanner.start().then(() => {
+        scanner.$canvas.style.display = "block";
         updateFlashAvailability();
         // List cameras after the scanner started to avoid listCamera's stream and the scanner's stream being requested
         // at the same time which can result in listCamera's unconstrained stream also being offered to the scanner.

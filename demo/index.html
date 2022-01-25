@@ -32,15 +32,6 @@
     <b>Device has camera: </b>
     <span id="cam-has-camera"></span>
     <br />
-    <div>
-      <b>Preferred camera:</b>
-      <select id="cam-list">
-        <option value="environment" selected>
-          Environment Facing (default)
-        </option>
-        <option value="user">User Facing</option>
-      </select>
-    </div>
     <b>Detected QR code: </b>
     <pre id="cam-qr-result">None</pre>
     <br />
@@ -57,9 +48,6 @@
 
       const video = document.getElementById("qr-video");
       const camHasCamera = document.getElementById("cam-has-camera");
-      const camList = document.getElementById("cam-list");
-      const camHasFlash = document.getElementById("cam-has-flash");
-      const flashState = document.getElementById("flash-state");
       const camQrResult = document.getElementById("cam-qr-result");
       const camQrResultTimestamp = document.getElementById(
         "cam-qr-result-timestamp"

@@ -10,10 +10,6 @@
       hr {
         margin-top: 32px;
       }
-      input[type="file"] {
-        display: block;
-        margin-bottom: 16px;
-      }
       div {
         margin-bottom: 16px;
       }
@@ -109,9 +105,10 @@
         (error) => {
           camQrResult.textContent = error;
           camQrResult.style.color = "inherit";
-          camQrResult.style.display = "block";
         }
       );
+
+      scanner.$canvas.style.display = "block";
 
       const updateFlashAvailability = () => {
         scanner.hasFlash().then((hasFlash) => {

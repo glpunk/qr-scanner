@@ -49,20 +49,19 @@
         "cam-qr-result-timestamp"
       );
       const scanBtn = document.getElementById("scan-code-btn");
+      let scanner = null;
 
       function setResult(label, result) {
-        console.log("setResult", result);
         label.textContent = result;
         camQrResultTimestamp.textContent = new Date().toString();
         label.style.color = "teal";
+        scanner.stop();
         clearTimeout(label.highlightTimeout);
         label.highlightTimeout = setTimeout(
           () => (label.style.color = "inherit"),
           100
         );
       }
-
-      let scanner = null;
 
       function scanCode() {
         // ####### Web Cam Scanning #######

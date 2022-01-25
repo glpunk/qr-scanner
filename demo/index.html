@@ -24,11 +24,6 @@
     <button id="scan-code-btn">Scan QR code</button>
     <div>
       <video id="qr-video"></video>
-      <br />
-      <label>
-        <input id="show-scan-region" type="checkbox" />
-        Show scan region
-      </label>
     </div>
     <b>Device has camera: </b>
     <span id="cam-has-camera"></span>
@@ -82,7 +77,12 @@
           }
         );
 
-        scanner.start().then(() => {});
+        scanner.start().then(() => {
+          console.log("scanner.start");
+          video.parentNode.insertBefore(scanner.$canvas, label.nextSibling);
+          scanner.$canvas.style.display = "block";
+          scanner.setCamera("environment");
+        });
 
         QrScanner.hasCamera().then(
           (hasCamera) => (camHasCamera.textContent = hasCamera)
@@ -90,16 +90,6 @@
 
         // for debugging
         window.scanner = scanner;
-
-        document
-          .getElementById("show-scan-region")
-          .addEventListener("change", (e) => {
-            const input = e.target;
-            const label = input.parentNode;
-            label.parentNode.insertBefore(scanner.$canvas, label.nextSibling);
-            scanner.$canvas.style.display = input.checked ? "block" : "none";
-            scanner.setCamera("environment");
-          });
 
         document
           .getElementById("start-button")

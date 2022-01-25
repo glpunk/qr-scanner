@@ -79,7 +79,7 @@
 
         scanner.start().then(() => {
           console.log("scanner.start");
-          video.parentNode.insertBefore(scanner.$canvas, label.nextSibling);
+          video.parentNode.insertBefore(scanner.$canvas, video.nextSibling);
           scanner.$canvas.style.display = "block";
           scanner.setCamera("environment");
         });

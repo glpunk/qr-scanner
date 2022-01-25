@@ -71,7 +71,6 @@
       const camHasCamera = document.getElementById("cam-has-camera");
       const camList = document.getElementById("cam-list");
       const camHasFlash = document.getElementById("cam-has-flash");
-      const flashToggle = document.getElementById("flash-toggle");
       const flashState = document.getElementById("flash-state");
       const camQrResult = document.getElementById("cam-qr-result");
       const camQrResultTimestamp = document.getElementById(
@@ -142,14 +141,6 @@
 
       camList.addEventListener("change", (event) => {
         scanner.setCamera(event.target.value).then(updateFlashAvailability);
-      });
-
-      flashToggle.addEventListener("click", () => {
-        scanner
-          .toggleFlash()
-          .then(
-            () => (flashState.textContent = scanner.isFlashOn() ? "on" : "off")
-          );
       });
 
       document.getElementById("start-button").addEventListener("click", () => {

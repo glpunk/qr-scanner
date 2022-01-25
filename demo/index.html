@@ -23,6 +23,11 @@
     <h1>Scan from WebCam:</h1>
     <div>
       <video id="qr-video"></video>
+      <br />
+      <label>
+        <input id="show-scan-region" type="checkbox" />
+        Show scan region
+      </label>
     </div>
     <div>
       <select id="inversion-mode-select">
@@ -106,6 +111,8 @@
         }
       );
 
+      scanner.$canvas.style.display = "block";
+
       const updateFlashAvailability = () => {
         scanner.hasFlash().then((hasFlash) => {
           camHasFlash.textContent = hasFlash;
@@ -114,7 +121,6 @@
       };
 
       scanner.start().then(() => {
-        scanner.$canvas.style.display = "block";
         updateFlashAvailability();
         // List cameras after the scanner started to avoid listCamera's stream and the scanner's stream being requested
         // at the same time which can result in listCamera's unconstrained stream also being offered to the scanner.
@@ -136,6 +142,15 @@
 
       // for debugging
       window.scanner = scanner;
+
+      document
+        .getElementById("show-scan-region")
+        .addEventListener("change", (e) => {
+          const input = e.target;
+          const label = input.parentNode;
+          label.parentNode.insertBefore(scanner.$canvas, label.nextSibling);
+          scanner.$canvas.style.display = input.checked ? "block" : "none";
+        });
 
       document
         .getElementById("inversion-mode-select")
